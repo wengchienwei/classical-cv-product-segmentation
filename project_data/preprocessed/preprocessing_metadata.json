@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-03-27T19:56:13.372510",
+  "total_images": 80,
+  "target_size": [
+    512,
+    512
+  ],
+  "apply_denoising": false,
+  "image_format": "jpg",
+  "mask_format": "png"
+}
