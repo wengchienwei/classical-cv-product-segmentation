@@ -60,6 +60,18 @@ technical_guidelines*.md
 DIS5K/
 *.zip
 
+# project data - exclude images, keep metadata only
+project_data/images/
+project_data/masks/
+project_data/preprocessed/images/
+project_data/preprocessed/masks/
+
+# keep these metadata files (explicitly listed)
+!project_data/preprocessing_metadata.json
+!project_data/selected_images.csv
+!project_data/dataset_statistics.csv
+!project_data/preprocessed/preprocessing_metadata.json
+
 # temporary files
 *.tmp
 *.bak
