@@ -1,0 +1,11 @@
+{
+  "method": "grabcut",
+  "config": {
+    "init_method": "rect",
+    "iterations": 10
+  },
+  "total_images": 80,
+  "successful": 80,
+  "failed": 0,
+  "timestamp": "2026-03-28T17:16:07.393419"
+}
