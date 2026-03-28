@@ -1,0 +1,58 @@
+{
+  "method": "grabcut",
+  "metrics": [
+    "iou",
+    "f1"
+  ],
+  "total_images": 80,
+  "evaluated_images": 80,
+  "overall_performance": {
+    "mean_iou": 0.26859057525062136,
+    "std_iou": 0.211249948538769,
+    "mean_f1": 0.38284736298004185,
+    "std_f1": 0.25068830078449195
+  },
+  "by_complexity": {
+    "DIS-TE1": {
+      "mean_iou": 0.1864,
+      "std_iou": 0.2235,
+      "min_iou": 0.0,
+      "max_iou": 0.665,
+      "mean_f1": 0.2644,
+      "std_f1": 0.2813,
+      "min_f1": 0.0,
+      "max_f1": 0.7988
+    },
+    "DIS-TE2": {
+      "mean_iou": 0.232,
+      "std_iou": 0.1414,
+      "min_iou": 0.0,
+      "max_iou": 0.4561,
+      "mean_f1": 0.3562,
+      "std_f1": 0.189,
+      "min_f1": 0.0,
+      "max_f1": 0.6265
+    },
+    "DIS-TE3": {
+      "mean_iou": 0.3454,
+      "std_iou": 0.2375,
+      "min_iou": 0.0,
+      "max_iou": 0.8303,
+      "mean_f1": 0.4709,
+      "std_f1": 0.2573,
+      "min_f1": 0.0,
+      "max_f1": 0.9073
+    },
+    "DIS-TE4": {
+      "mean_iou": 0.3105,
+      "std_iou": 0.2065,
+      "min_iou": 0.0,
+      "max_iou": 0.7904,
+      "mean_f1": 0.4399,
+      "std_f1": 0.2305,
+      "min_f1": 0.0,
+      "max_f1": 0.8829
+    }
+  },
+  "timestamp": "2026-03-28T20:46:44.054060"
+}
