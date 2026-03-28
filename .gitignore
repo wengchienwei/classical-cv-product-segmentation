@@ -66,11 +66,25 @@ project_data/masks/
 project_data/preprocessed/images/
 project_data/preprocessed/masks/
 
+# results - exclude most images, keep key figures only
+results/**/preprocessing_sample_*.png
+results/**/validation_*.png
+results/**/*.jpg
+results/**/*.png
+
+# explicitly keep these essential figures
+!results/**/dataset_distribution.png
+!results/**/dataset_statistics.png
+!results/**/preprocessed_validation.png
+!results/grabcut/initialization_comparison.png
+!results/grabcut/iteration_comparison_with_rect.png
+!results/grabcut/validation_52.png
+
 # keep these metadata files (explicitly listed)
-!project_data/preprocessing_metadata.json
-!project_data/selected_images.csv
-!project_data/dataset_statistics.csv
-!project_data/preprocessed/preprocessing_metadata.json
+!project_data/**/*.csv
+!project_data/**/*.json
+!results/**/*.csv
+!results/**/*.json
 
 # temporary files
 *.tmp
