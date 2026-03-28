@@ -4,7 +4,7 @@ Comparative study of classical computer vision methods for product instance segm
 
 ## Overview
 
-This project evaluates four classical segmentation methods (grabcut, k-means, watershed) on product images from the dis5k dataset. The goal is to compare classical approaches without deep learning and analyze their strengths and limitations.
+This project evaluates three classical segmentation methods (grabcut, k-means, watershed) on product images from the dis5k dataset. The goal is to compare classical approaches without deep learning and analyze their strengths and limitations.
 
 ## Project Structure
 ```
