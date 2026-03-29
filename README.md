@@ -25,7 +25,7 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 **Configuration:**
 - Initialization: Rectangle (10% margin)
 - Iterations: 10
-- No refinement (experiment showed -0.37% IoU impact)
+- No refinement (experiment showed -2% IoU impact)
 
 **Strengths:** Solid objects, clear boundaries (best: harp 83% IoU, caterpillar 81% IoU)  
 **Weaknesses:** Thin structures (rope, crack, wire frames → 0% IoU)
