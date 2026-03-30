@@ -6,13 +6,17 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 
 ---
 
-## Current Results
+## Results
 
-### GrabCut (Implemented)
+### Comparative Summary
 
-**Overall Performance:**
-- Mean IoU: **0.2686** (±0.2112)
-- Mean F1: **0.3828** (±0.2507)
+| Method | Mean IoU | Mean F1 | Avg Time/Image |
+|--------|----------|---------|----------------|
+| **GrabCut** | **0.2686 ± 0.2112** | **0.3828 ± 0.2507** | 9.08s |
+| K-means | 0.2224 ± 0.1911 | 0.3286 ± 0.2309 | 0.19s |
+| Watershed | 0.1131 ± 0.1714 | 0.1696 ± 0.2241 | 0.01s |
+
+### GrabCut
 
 **Performance by Complexity:**
 | Level | Mean IoU | Mean F1 | Description |
@@ -22,21 +26,37 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 | TE3 | 0.3454 | 0.4709 | Complex objects |
 | TE4 | 0.3105 | 0.4399 | Very complex |
 
-**Configuration:**
-- Initialization: Rectangle (10% margin)
-- Iterations: 10
-- No refinement (experiment showed -2% IoU impact)
-
-**Strengths:** Solid objects, clear boundaries (best: harp 83% IoU, caterpillar 81% IoU)  
+**Configuration:** Rectangle initialization (10% margin), 10 iterations, no refinement  
+**Strengths:** Solid objects with clear boundaries (best: harp 83% IoU, caterpillar 81% IoU)  
 **Weaknesses:** Thin structures (rope, crack, wire frames → 0% IoU)
 
-### K-means (Pending)
+### K-means
 
-Results pending teammate implementation.
+**Performance by Complexity:**
+| Level | Mean IoU | Mean F1 | Description |
+|-------|----------|---------|-------------|
+| TE1 | 0.1694 | 0.2605 | Simple objects |
+| TE2 | 0.1904 | 0.3002 | Medium complexity |
+| TE3 | 0.2384 | 0.3412 | Complex objects |
+| TE4 | 0.2912 | 0.4125 | Very complex |
 
-### Watershed (Pending)
+**Configuration:** K=2 clusters, Lab color space, border heuristic for foreground selection  
+**Strengths:** Fast processing, works well on high-contrast scenes (best: gym equipment 76% IoU, handcraft 73% IoU)  
+**Weaknesses:** No spatial coherence — noisy masks on textured backgrounds, fails on thin objects with similar colors to background
 
-Results pending teammate implementation.
+### Watershed
+
+**Performance by Complexity:**
+| Level | Mean IoU | Mean F1 | Description |
+|-------|----------|---------|-------------|
+| TE1 | 0.1405 | 0.2092 | Simple objects |
+| TE2 | 0.1160 | 0.1746 | Medium complexity |
+| TE3 | 0.0954 | 0.1429 | Complex objects |
+| TE4 | 0.1007 | 0.1519 | Very complex |
+
+**Configuration:** Otsu thresholding, distance transform (threshold 0.5), kernel size 3  
+**Strengths:** Clean boundaries on high-contrast objects (best: easel 74% IoU, crack 72% IoU)  
+**Weaknesses:** Otsu threshold fails on complex backgrounds, severe under-segmentation on most images
 
 ---
 
@@ -46,8 +66,8 @@ classical-cv-product-segmentation/
 ├── notebooks/
 │   ├── 01_dataset_preparation_preprocessing.ipynb  # Dataset sampling, preprocessing
 │   ├── 02_grabcut_segmentation.ipynb               # GrabCut implementation
-│   ├── 02_kmeans_segmentation.ipynb                # K-means implementation (pending)
-│   ├── 02_watershed_segmentation.ipynb             # Watershed implementation (pending)
+│   ├── 02_kmeans_segmentation.ipynb                # K-means implementation
+│   ├── 02_watershed_segmentation.ipynb             # Watershed implementation
 │   └── 03_refinement_evaluation_analysis.ipynb     # Evaluation pipeline (all methods)
 ├── project_data/
 │   ├── preprocessed/
@@ -58,29 +78,13 @@ classical-cv-product-segmentation/
 │   └── dataset_statistics.csv     # Complexity distribution
 ├── results/
 │   ├── preprocessing/
-│   │   ├── dataset_distribution.png
-│   │   ├── dataset_statistics.png
-│   │   └── preprocessed_validation.png
 │   ├── grabcut/
-│   │   ├── DIS-*.png              # 80 segmentation masks (not tracked)
-│   │   ├── grabcut_results.csv    # Processing log
-│   │   ├── evaluation_results.csv # IoU/F1 per image
-│   │   ├── evaluation_metadata.json
-│   │   ├── grabcut_evaluation_summary.png
-│   │   ├── initialization_comparison.png
-│   │   ├── iteration_comparison_with_rect.png
-│   │   ├── validation_52.png
-│   │   ├── best_case_44.png
-│   │   ├── best_case_46.png
-│   │   ├── worst_case_10.png
-│   │   └── worst_case_26.png
-│   ├── kmeans/ (pending)
-│   └── watershed/ (pending)
+│   ├── kmeans/
+│   └── watershed/
 ├── preprocessing.py               # Preprocessing module
 ├── requirements.txt
 ├── .gitignore
-├── README.md
-└── report.pdf (to be uploaded)
+└── README.md
 ```
 
 **Note:** Images and masks are not tracked in git (reproducible from dataset). Only metadata and key figures are committed.
@@ -117,82 +121,35 @@ pip install -r requirements.txt
 # 1. Dataset preparation
 jupyter notebook notebooks/01_dataset_preparation_preprocessing.ipynb
 
-# 2. GrabCut segmentation
+# 2. Segmentation (any order)
 jupyter notebook notebooks/02_grabcut_segmentation.ipynb
+jupyter notebook notebooks/02_kmeans_segmentation.ipynb
+jupyter notebook notebooks/02_watershed_segmentation.ipynb
 
-# 3. Evaluation
+# 3. Evaluation (run for each method)
 jupyter notebook notebooks/03_refinement_evaluation_analysis.ipynb
-```
-
-**Expected Runtime:** ~15 minutes total (preprocessing 2min, GrabCut 12min, evaluation 1min)
-
-### Reproducibility
-
-All results are reproducible:
-1. Dataset: Stratified sampling with fixed seed (42)
-2. Preprocessing: Deterministic resize, saved metadata
-3. GrabCut: Fixed parameters (10 iterations, rect init)
-4. Evaluation: Consistent metrics across all methods
-
-**To reproduce GrabCut results:**
-```bash
-# Run notebooks 01 → 02 → 03 (GrabCut section)
-# Results will match: IoU 0.2686 ± 0.2112
 ```
 
 </details>
 
 ---
 
-## For Teammates (K-means / Watershed)
-
-### Implementation Guide
-
-1. **Use preprocessing module** (already done):
-```python
-from preprocessing import load_image_pair
-img, gt_mask = load_image_pair(img_path, gt_path)
-```
-
-2. **Save results** to `../results/{method}/`:
-```
-../results/kmeans/DIS-TE1_*.png    # or watershed
-../results/kmeans/kmeans_results.csv
-```
-
-3. **Run evaluation** in notebook 03:
-```python
-# Change config at top of notebook
-METHOD_CONFIG = {
-    'name': 'kmeans',              # or 'watershed'
-    'results_dir': '../results/kmeans'
-}
-# Then run evaluation pipeline section
-```
-
----
-
 ## Methodology
 
 **Dataset:**
-- 80 images from DIS5K (stratified sampling)
+- 80 images from DIS5K (stratified sampling, seed 42)
 - 4 complexity levels (TE1-TE4), 20 images each
 - Preprocessing: 512×512 resize, no denoising
 
 **Methods:**
-1. **GrabCut** - Graph-cut based iterative segmentation
-2. **K-means** - Color-based clustering segmentation
-3. **Watershed** - Gradient-based region growing
+1. **GrabCut** — Graph-cut iterative segmentation with GMM color models
+2. **K-means** — Color clustering in Lab space with border-based foreground selection
+3. **Watershed** — Marker-based segmentation via Otsu thresholding and distance transform
 
 **Evaluation:**
 - Metrics: IoU (primary), F1-score (secondary)
 - Per-image and per-complexity analysis
 - Best/worst case identification
-
-**Pipeline Design:**
-- Modular design (same notebook for all methods)
-- Reproducible (fixed random seeds, saved configs)
-- Independent implementation (minimal coordination needed)
 
 ---
 
@@ -216,20 +173,10 @@ METHOD_CONFIG = {
 
 ---
 
-## Project Timeline
-
-- **Completed:** Dataset preparation, preprocessing, GrabCut implementation, evaluation pipeline
-- **In Progress:** K-means (teammate 1), Watershed (teammate 2)
-- **Next:** Comparative analysis, report writing
-
----
-
 ## Authors
 
 Chien-Wei Weng | Aris Fèvre | Henri Boisson  
 MSc Data Sciences and Business Analytics  
 CentraleSupélec × ESSEC Business School
-
----
 
 **Academic Project | Computer Vision (Spring 2026)**
