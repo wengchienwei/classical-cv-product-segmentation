@@ -52,7 +52,6 @@ ipython_config.py
 Thumbs.db
 
 # project specific
-*.pdf
 technical_guidelines*.md
 *.md.backup
 

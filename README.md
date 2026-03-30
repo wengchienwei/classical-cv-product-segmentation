@@ -83,7 +83,9 @@ classical-cv-product-segmentation/
 │   └── watershed/
 ├── requirements.txt
 ├── .gitignore
-└── README.md
+├── README.md
+└── report.pdf                              # Full technical report
+
 ```
 
 **Note:** Images and masks are not tracked in git (reproducible from dataset). Only metadata and key figures are committed.
