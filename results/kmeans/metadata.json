@@ -1,0 +1,13 @@
+{
+  "method": "kmeans",
+  "config": {
+    "k": 2,
+    "color_space": "lab",
+    "use_spatial": false,
+    "spatial_weight": 0.5
+  },
+  "total_images": 80,
+  "successful": 80,
+  "failed": 0,
+  "timestamp": "2026-03-30T14:03:38.378627"
+}

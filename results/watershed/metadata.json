@@ -1,0 +1,12 @@
+{
+  "method": "watershed",
+  "config": {
+    "dist_threshold": 0.5,
+    "morph_kernel_size": 3,
+    "morph_iterations": 2
+  },
+  "total_images": 80,
+  "successful": 80,
+  "failed": 0,
+  "timestamp": "2026-03-30T14:04:25.978418"
+}
