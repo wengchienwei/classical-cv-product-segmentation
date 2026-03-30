@@ -73,11 +73,6 @@ results/**/*.jpg
 results/**/*.png
 results/**/refined/
 
-# explicitly keep these essential figures
-!results/**/dataset_distribution.png
-!results/**/dataset_statistics.png
-!results/**/preprocessed_validation.png
-
 # keep these metadata files (explicitly listed)
 !project_data/**/*.csv
 !project_data/**/*.json

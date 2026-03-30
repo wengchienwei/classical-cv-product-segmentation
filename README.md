@@ -68,7 +68,8 @@ classical-cv-product-segmentation/
 │   ├── 02_grabcut_segmentation.ipynb               # GrabCut implementation
 │   ├── 02_kmeans_segmentation.ipynb                # K-means implementation
 │   ├── 02_watershed_segmentation.ipynb             # Watershed implementation
-│   └── 03_refinement_evaluation_analysis.ipynb     # Evaluation pipeline (all methods)
+│   ├── 03_refinement_evaluation_analysis.ipynb     # Evaluation pipeline (all methods)
+│   └── preprocessing.py                            # Preprocessing module
 ├── project_data/
 │   ├── preprocessed/
 │   │   ├── images/                # 80 images (512×512, not tracked)
@@ -77,11 +78,9 @@ classical-cv-product-segmentation/
 │   ├── selected_images.csv        # Stratified sampling manifest
 │   └── dataset_statistics.csv     # Complexity distribution
 ├── results/
-│   ├── preprocessing/
 │   ├── grabcut/
 │   ├── kmeans/
 │   └── watershed/
-├── preprocessing.py               # Preprocessing module
 ├── requirements.txt
 ├── .gitignore
 └── README.md
