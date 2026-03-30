@@ -72,11 +72,11 @@ classical-cv-product-segmentation/
 │   └── preprocessing.py                            # Preprocessing module
 ├── project_data/
 │   ├── preprocessed/
-│   │   ├── images/                # 80 images (512×512, not tracked)
-│   │   ├── masks/                 # 80 masks (512×512, not tracked)
+│   │   ├── images/                                 # 80 images (512×512, not tracked)
+│   │   ├── masks/                                  # 80 masks (512×512, not tracked)
 │   │   └── preprocessing_metadata.json
-│   ├── selected_images.csv        # Stratified sampling manifest
-│   └── dataset_statistics.csv     # Complexity distribution
+│   ├── selected_images.csv                         # Stratified sampling manifest
+│   └── dataset_statistics.csv                      # Complexity distribution
 ├── results/
 │   ├── grabcut/
 │   ├── kmeans/
