@@ -84,7 +84,7 @@ classical-cv-product-segmentation/
 ├── requirements.txt
 ├── .gitignore
 ├── README.md
-└── report.pdf                              # Full technical report
+└── report.pdf                                      # Full technical report
 
 ```
 
