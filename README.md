@@ -41,7 +41,7 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 | TE4 | 0.2553 | 0.3904 | Very complex |
 
 **Configuration:** K=3 clusters, HSV color space, border heuristic for foreground selection  
-**Strengths:** Fast processing, works well on high-contrast scenes (best: rack 78% IoU, windmill 59% IoU)  
+**Strengths:** Fast processing, works well on high-contrast scenes (best: gym equipment 78% IoU, windmill 59% IoU)  
 **Weaknesses:** No spatial coherence — noisy masks on textured backgrounds, fails on thin objects with similar colors to background
 
 ### Watershed
@@ -55,7 +55,7 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 | TE4 | 0.1791 | 0.2636 | Very complex |
 
 **Configuration:** Otsu thresholding, distance transform (threshold 0.2), kernel size 3  
-**Strengths:** Clean boundaries on high-contrast objects (best: gym equipment 76% IoU, easel 66% IoU)  
+**Strengths:** Clean boundaries on high-contrast objects (best: easel 76% IoU)  
 **Weaknesses:** Otsu threshold fails on complex backgrounds, severe under-segmentation on most images
 
 ---
