@@ -13,8 +13,8 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 | Method | Mean IoU | Mean F1 | Avg Time/Image |
 |--------|----------|---------|----------------|
 | **GrabCut** | **0.2686 ± 0.2112** | **0.3828 ± 0.2507** | 9.08s |
-| K-means | 0.2224 ± 0.1911 | 0.3286 ± 0.2309 | 0.19s |
-| Watershed | 0.1131 ± 0.1714 | 0.1696 ± 0.2241 | 0.01s |
+| K-means | 0.2123 ± 0.1602 | 0.3242 ± 0.2016 | 0.19s |
+| Watershed | 0.1626 ± 0.1837 | 0.2433 ± 0.2366 | 0.01s |
 
 ### GrabCut
 
@@ -35,13 +35,13 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 **Performance by Complexity:**
 | Level | Mean IoU | Mean F1 | Description |
 |-------|----------|---------|-------------|
-| TE1 | 0.1694 | 0.2605 | Simple objects |
-| TE2 | 0.1904 | 0.3002 | Medium complexity |
-| TE3 | 0.2384 | 0.3412 | Complex objects |
-| TE4 | 0.2912 | 0.4125 | Very complex |
+| TE1 | 0.1899 | 0.2808 | Simple objects |
+| TE2 | 0.1761 | 0.2733 | Medium complexity |
+| TE3 | 0.2278 | 0.3522 | Complex objects |
+| TE4 | 0.2553 | 0.3904 | Very complex |
 
-**Configuration:** K=2 clusters, Lab color space, border heuristic for foreground selection  
-**Strengths:** Fast processing, works well on high-contrast scenes (best: gym equipment 76% IoU, handcraft 73% IoU)  
+**Configuration:** K=3 clusters, HSV color space, border heuristic for foreground selection  
+**Strengths:** Fast processing, works well on high-contrast scenes (best: rack 78% IoU, windmill 59% IoU)  
 **Weaknesses:** No spatial coherence — noisy masks on textured backgrounds, fails on thin objects with similar colors to background
 
 ### Watershed
@@ -49,13 +49,13 @@ Comparative study of classical segmentation methods (GrabCut, K-means, Watershed
 **Performance by Complexity:**
 | Level | Mean IoU | Mean F1 | Description |
 |-------|----------|---------|-------------|
-| TE1 | 0.1405 | 0.2092 | Simple objects |
-| TE2 | 0.1160 | 0.1746 | Medium complexity |
-| TE3 | 0.0954 | 0.1429 | Complex objects |
-| TE4 | 0.1007 | 0.1519 | Very complex |
+| TE1 | 0.1687 | 0.2484 | Simple objects |
+| TE2 | 0.1548 | 0.2426 | Medium complexity |
+| TE3 | 0.1480 | 0.2186 | Complex objects |
+| TE4 | 0.1791 | 0.2636 | Very complex |
 
-**Configuration:** Otsu thresholding, distance transform (threshold 0.5), kernel size 3  
-**Strengths:** Clean boundaries on high-contrast objects (best: easel 74% IoU, crack 72% IoU)  
+**Configuration:** Otsu thresholding, distance transform (threshold 0.2), kernel size 3  
+**Strengths:** Clean boundaries on high-contrast objects (best: gym equipment 76% IoU, easel 66% IoU)  
 **Weaknesses:** Otsu threshold fails on complex backgrounds, severe under-segmentation on most images
 
 ---
@@ -68,23 +68,23 @@ classical-cv-product-segmentation/
 │   ├── 02_grabcut_segmentation.ipynb               # GrabCut implementation
 │   ├── 02_kmeans_segmentation.ipynb                # K-means implementation
 │   ├── 02_watershed_segmentation.ipynb             # Watershed implementation
-│   └── 03_refinement_evaluation_analysis.ipynb     # Evaluation pipeline (all methods)
+│   ├── 03_refinement_evaluation_analysis.ipynb     # Evaluation pipeline (all methods)
+│   └── preprocessing.py                            # Preprocessing module
 ├── project_data/
 │   ├── preprocessed/
-│   │   ├── images/                # 80 images (512×512, not tracked)
-│   │   ├── masks/                 # 80 masks (512×512, not tracked)
+│   │   ├── images/                                 # 80 images (512×512, not tracked)
+│   │   ├── masks/                                  # 80 masks (512×512, not tracked)
 │   │   └── preprocessing_metadata.json
-│   ├── selected_images.csv        # Stratified sampling manifest
-│   └── dataset_statistics.csv     # Complexity distribution
+│   ├── selected_images.csv                         # Stratified sampling manifest
+│   └── dataset_statistics.csv                      # Complexity distribution
 ├── results/
-│   ├── preprocessing/
 │   ├── grabcut/
 │   ├── kmeans/
 │   └── watershed/
-├── preprocessing.py               # Preprocessing module
 ├── requirements.txt
 ├── .gitignore
-└── README.md
+├── README.md
+└── report.pdf                                      # Full technical report
 ```
 
 **Note:** Images and masks are not tracked in git (reproducible from dataset). Only metadata and key figures are committed.
@@ -143,8 +143,8 @@ jupyter notebook notebooks/03_refinement_evaluation_analysis.ipynb
 
 **Methods:**
 1. **GrabCut** — Graph-cut iterative segmentation with GMM color models
-2. **K-means** — Color clustering in Lab space with border-based foreground selection
-3. **Watershed** — Marker-based segmentation via Otsu thresholding and distance transform
+2. **K-means** — Color clustering in HSV space (k=3) with border-based foreground selection
+3. **Watershed** — Marker-based segmentation via Otsu thresholding and distance transform (threshold 0.2)
 
 **Evaluation:**
 - Metrics: IoU (primary), F1-score (secondary)
