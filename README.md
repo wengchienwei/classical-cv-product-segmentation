@@ -85,6 +85,7 @@ classical-cv-product-segmentation/
 ├── .gitignore
 ├── README.md
 └── report.pdf                                      # Full technical report
+
 ```
 
 **Note:** Images and masks are not tracked in git (reproducible from dataset). Only metadata and key figures are committed.

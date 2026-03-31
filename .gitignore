@@ -52,7 +52,6 @@ ipython_config.py
 Thumbs.db
 
 # project specific
-*.pdf
 technical_guidelines*.md
 *.md.backup
 
@@ -72,19 +71,6 @@ results/**/validation_*.png
 results/**/*.jpg
 results/**/*.png
 results/**/refined/
-
-# explicitly keep these essential figures
-!results/**/dataset_distribution.png
-!results/**/dataset_statistics.png
-!results/**/preprocessed_validation.png
-!results/grabcut/initialization_comparison.png
-!results/grabcut/iteration_comparison_with_rect.png
-!results/grabcut/validation_52.png
-!results/grabcut/grabcut_evaluation_summary.png
-!results/grabcut/best_case_44.png
-!results/grabcut/best_case_46.png
-!results/grabcut/worst_case_10.png
-!results/grabcut/worst_case_26.png
 
 # keep these metadata files (explicitly listed)
 !project_data/**/*.csv
