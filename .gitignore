@@ -53,6 +53,8 @@ Thumbs.db
 
 # project specific
 technical_guidelines*.md
+proposal.pdf
+papers/
 *.md.backup
 
 # large dataset files
